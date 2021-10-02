@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    ports:
+      - "8080:80"
+  php:
+    build: ./
+    volumes:
+      - ./:/var/www/html
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: osticket
+    volumes:
+      - ./data/:/var/lib/mysql
